@@ -1,6 +1,6 @@
 'use strict';
 
-var ngSignItApp = angular.module('ngSignItApp', [])
+var ngSignItApp = angular.module('ngSignItApp', ['MyDirectives','DataServices','ui'])
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .when('/', {
