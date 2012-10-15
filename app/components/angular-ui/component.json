@@ -1,0 +1,26 @@
+{
+  "author": {
+    "name": "https://github.com/angular-ui/angular-ui/graphs/contributors"
+  },
+  "name": "angular-ui",
+  "description": "AngularUI - The companion suite for AngularJS",
+  "version": "0.2.1",
+  "homepage": "http://angular-ui.github.com",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/angular-ui/angular-ui.git"
+  },
+  "engines": {
+    "node": ">= 0.6.11"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt-recess": "~0.1.0",
+    "grunt-coffee": "~0.0.3",
+    "async": "0.1.x",
+    "testacular": "~0.2.0"
+  },
+  "readme": "# AngularUI - The companion suite for AngularJS\n\n***\n\n## Usage\n\n### Requirements\n\n* **AngularJS v1.0.0+** is currently required.\n* **jQuery / Plugins** _(depends on directive)._ Check specific directive dependencies for more information\n\n## Installation\n\nThe repository comes with the modules pre-built and compressed into the `build/` directory.\n\n```javascript\nangular.module('myApp', ['ui']);\n```\n\nThe modules can be found in the [Directives](https://github.com/angular-ui/angular-ui/tree/master/modules/directives) and [Filters](https://github.com/angular-ui/angular-ui/tree/master/modules/filters) folders. Check out the readme file associated with each module for specific module usage information.\n\n## Development\n\nYou do not need to build the project to use it - see above - but if you are working on it then this is what you need to know.\n\n### Requirements\n\n0. Install [Node.js](http://nodejs.org/) and NPM (should come with)\n\n1. Install local dependencies:\n\n```bash\n$ npm install\n```\n\n2. Install global dependencies `grunt`, `coffee-script`, and `testacular`:\n\n```bash\n$ npm install -g testacular coffee-script grunt\n```\n\n### Build Files & Run Tests\n\nBefore you commit, always run `grunt` to build and test everything once.\n\n```bash\n$ grunt\n```\n\n### Test & Develop\n\nThe modules come with unit tests that should be run on any changes and certainly before commiting changes to the project.  The unit tests should also provide further insight into the usage of the modules.\n\nFirst, start the testacular server:\n```bash\n$ grunt server\n```\nThen, open your browser to http://localhost:8080 and run the watch command to re-run tests on every save:\n```bash\n$ grunt watch\n```\n\n### Publishing\n\nFor core team: if you wish to publish a new version follow these steps:\n\n1. Bump the version number inside `package.json`\n2. Build and test\n3. Commit the updated `package.json` and `build/` folder on their own commit\n4. Tag the commit: `git tag v[maj].[min].[patch]`\n5. Push the tag: `git push [angular-ui] master --tags`",
+  "readmeFilename": "README.md",
+  "_id": "angular-ui@0.2.1"
+}
