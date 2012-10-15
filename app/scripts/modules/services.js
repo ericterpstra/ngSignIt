@@ -8,6 +8,7 @@ angular.module('DataServices', [])
     // Initialize Parse API and objects.
     Parse.initialize("d46qFYur20F0T5XqD61wGWHtey9z3Q1ouBkm2t3X", "8Mo9iTOBJmmcPwAYcT4EppSBZlQulHn75RUT9Sny");
     var Signature = Parse.Object.extend("Signature");
+    var Petition = Parse.Object.extend("Petition");
     var PetitionCollection = Parse.Collection.extend({ model: Petition });
 
     /**

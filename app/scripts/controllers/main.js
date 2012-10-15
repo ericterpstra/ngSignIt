@@ -2,7 +2,7 @@
 
 
 var MainCtrl = ngSignItApp.controller('MainCtrl', function($scope,ParseService) {
-
+  $scope.petitions = [{id:1}];
   $scope.saveSignature = function saveSignature() {  
     var sigData = {  firstName: $scope.firstName,
                      lastname: $scope.lastName,
@@ -11,6 +11,11 @@ var MainCtrl = ngSignItApp.controller('MainCtrl', function($scope,ParseService) 
 
     ParseService.saveSignature(sigData);  
   }
+
+  ParseService.getPetitions(function (results) {
+    $scope.petitions = results.models;
+    var test = 0;
+  })
 
 });
 MainCtrl.$inject = ['$scope','ParseService'];
