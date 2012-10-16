@@ -1,14 +1,19 @@
 angular.module('MyDirectives',[]).directive('sigpad', function($timeout){
   return {
-    templateUrl: 'sigPad.html',
+    templateUrl: 'views/sigPad.html',
     restrict: 'E',
     scope : true,
     require: 'ngModel',
     link: function (scope,element,attr,ctrl) {
       var sigPadAPI = $(element).signaturePad({
-                                  drawOnly:true
+                                  drawOnly:true,
+                                  lineColour: '#FFF'
                                 });
-                                
+      
+      $(attr.clearbtn).on('click',function (e) {
+        sigPadAPI.clearCanvas();
+      });
+      
       scope.updateModel = function() {
         $timeout(function() {
           console.log('updateModel', scope);

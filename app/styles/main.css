@@ -1,5 +1,97 @@
 /* Will be compiled down to a single stylesheet with your sass files */
+body {
+  background-image: url(http://subtlepatterns.com/patterns/white_carbonfiber.png);
+}
+
+
+@media (max-width: 767px) {
+  .container {
+    min-width: 476px;
+  }
+}
+
+@media (max-width: 979px) and (min-width: 768px) {
+    input.span3, textarea.span3, .uneditable-input.span3 {
+    width: 148px;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 979px) {
+  input.span3, textarea.span3, .uneditable-input.span3 {
+    width: 202px;
+  }
+}
+
+.control input {
+  margin-bottom: 5px;
+}
 
 .container {
   text-align: center;
 }
+
+.row {
+  margin-top: 10px;
+}
+
+.title {
+  color: #353938;
+  text-shadow: 0 1px 0 #ffffff;
+}
+
+.select2-container {
+  width: 100%;
+}
+
+.description {
+  margin-top: 10px;
+  /*height: 62px;*/
+}
+
+.sigWrapper {
+  height: auto;
+  border: none;
+}
+
+.sigPad {
+  width: auto;
+}
+
+.pad {
+  background: white;
+  border-style: solid;
+  border-width: 1px;
+}
+
+/* http://css-tricks.com/snippets/css/stack-of-paper/ */
+.papers {
+  background-color: white;
+  height: 100%;
+  padding: 20px;
+ 
+  -webkit-box-shadow: 
+        1px 1px   0 rgba(0,   0,   0,   0.100), 
+        3px 3px   0 rgba(255, 255, 255, 1.0), 
+        4px 4px   0 rgba(0,   0,   0,   0.125), 
+        6px 6px   0 rgba(255, 255, 255, 1.0),  
+        7px 7px   0 rgba(0,   0,   0,   0.150), 
+        9px 9px   0 rgba(255, 255, 255, 1.0),  
+        10px 10px 0 rgba(0,   0,   0,   0.175);
+  -moz-box-shadow: 
+        1px 1px   0 rgba(0,   0,   0,   0.100), 
+        3px 3px   0 rgba(255, 255, 255, 1.0), 
+        4px 4px   0 rgba(0,   0,   0,   0.125), 
+        6px 6px   0 rgba(255, 255, 255, 1.0),  
+        7px 7px   0 rgba(0,   0,   0,   0.150), 
+        9px 9px   0 rgba(255, 255, 255, 1.0),  
+        10px 10px 0 rgba(0,   0,   0,   0.175);
+  box-shadow: 
+        1px 1px   0 rgba(0,   0,   0,   0.100), 
+        3px 3px   0 rgba(255, 255, 255, 1.0), 
+        4px 4px   0 rgba(0,   0,   0,   0.125), 
+        6px 6px   0 rgba(255, 255, 255, 1.0),  
+        7px 7px   0 rgba(0,   0,   0,   0.150), 
+        9px 9px   0 rgba(255, 255, 255, 1.0),  
+        10px 10px 0 rgba(0,   0,   0,   0.175);
+    
+}​

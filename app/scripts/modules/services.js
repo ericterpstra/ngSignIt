@@ -21,7 +21,7 @@ angular.module('DataServices', [])
 
         petitions.fetch({
           success: function (results) {
-              callback(results);
+              callback(petitions);
           },
           error: function ( results,error) {
               alert("Collection Error: " + error.message);
@@ -29,7 +29,7 @@ angular.module('DataServices', [])
         });
       },
 
-      saveSignature : function getCats(data, callback){
+      saveSignature : function saveSignature(data, callback){
         var sig = new Signature();
             sig.save( data,
                       {
@@ -59,7 +59,7 @@ angular.module('DataServices', [])
      */
     var StackMobService = {
 
-      saveSignature : function getCats(data, callback){
+      saveSignature : function saveSignature(data, callback){
       },
 
       getSignatures : function(callback) {

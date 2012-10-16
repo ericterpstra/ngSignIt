@@ -1,11 +1,40 @@
 <div class="container" ng-controller="MainCtrl">
-  <div class="row span12">
-    <h1>Choose something to sign, then sign it!</h1>
+  <div class="row span12 title">
+    <h1>AngularJS SignIt!</h1>
+    <h2>Starring HTML5 Signature Pad and Parse.com</h2>
   </div>
-  <div class="row span12">
-    <select ng-model="select2">
-      <option value="">Pick Something!</option>
-      <option ng-repeat="petition in petitions" >{{petition.id}}</option>
-    </select>
-  </div>
+  <div class="row span8 offset2">
+    <div class='papers'>
+      <select ui-select2 ng-model="select2" ui-event="{ change : 'pickPetition(select2)' }">
+        <option value="">Choose something to sign, then sign it!</option>
+        <option ng-repeat="petition in petitionCollection.models" value="{{petition.id}}">{{petition.get('Title')}}</option>
+      </select>
+
+      <div class="well description">
+        {{petitionDescription}}
+      </div>
+      <form name="sigForm" class="form-inline" ng-submit="saveSignature()">
+
+        <!-- Name Field -->
+        <div class="control-group">
+          <div class="control">
+            <input type="text" class="span2" placeholder="First Name" ng-model="user.firstName" required>
+            <input type="text" class="span3" placeholder="Last Name" ng-model="user.lastName" required> 
+            <input type="email" class="span3" placeholder="Email" ng-model="user.email" required> 
+          </div>
+        </div>
+
+        <!-- Signature Pad -->
+        <div class="control-group">
+          <sigpad ng-model='user.signature' clearBtn=".clearButton" name="signature" required></sigpad>
+        </div>
+
+        <div class="control-group">
+          <input type="button" class='btn clearButton' value="Clear" ng-click="clearData()">
+          <button class='btn btn-primary saveButton'>Save</button>
+        </div>
+      </form>
+    </div>
+</div>
+
 </div>
