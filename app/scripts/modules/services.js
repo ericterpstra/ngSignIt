@@ -89,7 +89,13 @@ angular.module('DataServices', [])
     // COMING SOON! Use StacMob instead of Parse.com as a back-end provider.
     // STackmob also bases their javascript API on backbone.js, so most of the data is saved and retrieved 
     // in a manner similar to Parse.com.  It should be fairly trivial for a controller to use one service or the other
-    
+    StackMob.init({
+      appName: "xxx",
+      clientSubdomain: "xxx",
+      publicKey: "xxx",
+      apiVersion: 0
+    });
+
     /**
      * Service Object
      */
