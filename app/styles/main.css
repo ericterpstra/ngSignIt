@@ -8,12 +8,10 @@ body {
     font-family: 'jellyka_-_estryas_handwritiRg';
     src: url('jellyka_estrya_handwriting-webfont.eot');
     src: url('jellyka_estrya_handwriting-webfont.eot?#iefix') format('embedded-opentype'),
-         url('jellyka_estrya_handwriting-webfont.woff') format('woff'),
          url('jellyka_estrya_handwriting-webfont.ttf') format('truetype'),
          url('jellyka_estrya_handwriting-webfont.svg#jellyka_-_estryas_handwritiRg') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 
 .script {
@@ -105,6 +103,10 @@ th.script {
 table img {
   max-height: 33%;
   width: auto;
+}
+
+.bottomInfoBlock {
+  margin-top: 25px;
 }
 
 /* http://css-tricks.com/snippets/css/stack-of-paper/ */
