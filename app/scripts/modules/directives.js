@@ -1,4 +1,5 @@
-angular.module('MyDirectives',[]).directive('sigpad', function($timeout){
+angular.module('MyDirectives',[])
+.directive('sigpad', function($timeout){
   return {
     templateUrl: 'views/sigPad.html',
     restrict: 'E',
@@ -16,13 +17,11 @@ angular.module('MyDirectives',[]).directive('sigpad', function($timeout){
       
       scope.updateModel = function() {
         $timeout(function() {
-          console.log('updateModel', scope);
           ctrl.$setViewValue(sigPadAPI.getSignature());
         });
       };      
       
       ctrl.$render = function() {
-        console.log('render', ctrl.$viewValue);
         if ( ctrl.$viewValue ) {
           sigPadAPI.regenerate(ctrl.$viewValue);
         } else {
@@ -35,17 +34,28 @@ angular.module('MyDirectives',[]).directive('sigpad', function($timeout){
         console.log('validating', viewValue);
         if ( sigPadAPI.validateForm() ) {
           // it is valid
-          console.log('valid');
           ctrl.$setValidity('sigpad', true);
           return viewValue;
         } else {
           // it is invalid, return undefined (no model update)
-          console.log('invalid');
           ctrl.$setValidity('sigpad', false);
           return undefined;
         }
       });      
       
     }
+  };
+})
+.directive('regensigpad',function() {
+  return {
+    template: '<div class="sig sigWrapper"><canvas class="pad" width="436" height="120"></canvas></div>',
+    restrict: 'E',
+    scope: true,
+    link: function (scope,element,attr,ctrl) {
+      var sigPadAPI = $(element).signaturePad({
+        displayOnly: true
+      }).regenerate(scope.$eval(attr.sigdata));      
+    }
+
   };
 });

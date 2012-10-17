@@ -5,15 +5,16 @@
   </div>
   <div class="row span8 offset2">
     <div class='papers'>
-      <select ui-select2 ng-model="select2" ui-event="{ change : 'pickPetition(select2)' }">
-        <option value="">Choose something to sign, then sign it!</option>
-        <option ng-repeat="petition in petitionCollection.models" value="{{petition.id}}">{{petition.get('Title')}}</option>
-      </select>
-
-      <div class="well description">
-        {{petitionDescription}}
-      </div>
       <form name="sigForm" class="form-inline" ng-submit="saveSignature()">
+
+        <select name='petition' ui-select2 ng-model="select2" ui-event="{ change : 'pickPetition(select2)' }" ng-change="getSignatures(select2)">
+          <option value="">Choose something to sign, then sign it!</option>
+          <option ng-repeat="petition in petitionCollection.models" value="{{petition.id}}">{{petition.get('Title')}}</option>
+        </select>
+
+        <div class="well description">
+          {{petitionDescription}}
+        </div>
 
         <!-- Name Field -->
         <div class="control-group">
@@ -29,12 +30,37 @@
           <sigpad ng-model='user.signature' clearBtn=".clearButton" name="signature" required></sigpad>
         </div>
 
-        <div class="control-group">
-          <input type="button" class='btn clearButton' value="Clear" ng-click="clearData()">
-          <button class='btn btn-primary saveButton'>Save</button>
+        <div class="control-group buttons">
+          <input type="button" class='btn clearButton span2' value="Clear" ng-click="clearData()" />
+          <input type="submit" class='btn btn-primary saveButton span2 pull-right' value="Save" />
         </div>
       </form>
-    </div>
+
+      <hr />
+
+      <h3>Super Signers:</h3>
+      <div>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Signature</th>
+              </tr>
+          </thead>   
+          <tbody>
+            <tr ng-repeat="signed in signatureList">
+              <td>{{signed.get('firstName')}} {{signed.get('lastName')}}</td>
+              <td>{{signed.get('email')}}</td>
+              <td>
+                <regensigpad sigdata={{signed.get('signature')}}></regensigpad>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div> <!-- paper -->
 </div>
 
 </div>

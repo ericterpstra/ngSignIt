@@ -63,6 +63,14 @@ body {
   border-width: 1px;
 }
 
+.buttons {
+  text-align: left;
+}
+
+.buttons input {
+  margin-bottom: 5px;
+}
+
 /* http://css-tricks.com/snippets/css/stack-of-paper/ */
 .papers {
   background-color: white;

@@ -7,7 +7,10 @@ angular.module('DataServices', [])
 .factory('ParseService', function(){
     // Initialize Parse API and objects.
     Parse.initialize("d46qFYur20F0T5XqD61wGWHtey9z3Q1ouBkm2t3X", "8Mo9iTOBJmmcPwAYcT4EppSBZlQulHn75RUT9Sny");
+
     var Signature = Parse.Object.extend("Signature");
+    var SignatureCollection = Parse.Collection.extend({ model: Signature });
+
     var Petition = Parse.Object.extend("Petition");
     var PetitionCollection = Parse.Collection.extend({ model: Petition });
 
@@ -31,19 +34,30 @@ angular.module('DataServices', [])
 
       saveSignature : function saveSignature(data, callback){
         var sig = new Signature();
-            sig.save( data,
-                      {
-                        success: function (obj) {
-                          callback(obj);
-                        },
-                        error: function (obj) {
-                          alert("Error: " + obj.message);
-                        }
-                      }
-            );
+        sig.save( data,
+                  {
+                    success: function (obj) {
+                      callback(obj);
+                    },
+                    error: function (obj, error) {
+                      alert("Error: " + error.message);
+                    }
+                  }
+        );
       },
 
-      getSignatures : function(callback) {
+      getSignatures : function getSignatures(petitionId, callback) {
+        var signatures = new SignatureCollection();
+        var query = new Parse.Query(Signature);
+        query.equalTo("petitionId", petitionId);
+        query.find({
+          success: function (results) {
+            callback(results);
+          },
+          error: function (error) {
+            alert("Error: " + error.message);
+          }
+        });
       }
     
     };
