@@ -19,6 +19,7 @@ var MainCtrl = ngSignItApp.controller('MainCtrl', function($scope,ParseService) 
       $scope.user.petitionId = $scope.select2;
       ParseService.saveSignature($scope.user, function() {
         $scope.clearData();
+        $scope.getSignatures($scope.select2);
       });  
     }
   };
@@ -26,8 +27,11 @@ var MainCtrl = ngSignItApp.controller('MainCtrl', function($scope,ParseService) 
   $scope.pickPetition = function pickPetition(id) {  
     if(id) {
       $scope.petitionDescription = $scope.petitionCollection.get(id).get('Description');
+      $scope.formDisabled = false;
     } else {
-      $scope.petitionDescription = "Choose a cause/petition/whatever in the box above, then plop down your name, email address, and John Hancock to show your support."
+      $scope.petitionDescription = "Choose a cause / petition / whatever in the box above, then plop down your name, email address, and John Hancock below to show your support."
+      $scope.formDisabled = true;
+      $scope.clearData();
     }
   };
 
@@ -48,7 +52,8 @@ var MainCtrl = ngSignItApp.controller('MainCtrl', function($scope,ParseService) 
 
   $scope.signatureList = [];
   $scope.clearData();
-  
+  $scope.formDisabled = true;
+
   ParseService.getPetitions(function (results) {
     $scope.$apply(function() {
       $scope.petitionCollection = results;

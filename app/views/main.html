@@ -1,8 +1,9 @@
 <div class="container" ng-controller="MainCtrl">
-  <div class="row span12 title">
-    <h1>AngularJS SignIt!</h1>
-    <h2>Starring HTML5 Signature Pad and Parse.com</h2>
+  
+  <div class="row span12 title form-inline">
+    <div class="topTitle">AngularJS</div> <div class="script">SignIt!</div>
   </div>
+
   <div class="row span8 offset2">
     <div class='papers'>
       <form name="sigForm" class="form-inline" ng-submit="saveSignature()">
@@ -19,9 +20,9 @@
         <!-- Name Field -->
         <div class="control-group">
           <div class="control">
-            <input type="text" class="span2" placeholder="First Name" ng-model="user.firstName" required>
-            <input type="text" class="span3" placeholder="Last Name" ng-model="user.lastName" required> 
-            <input type="email" class="span3" placeholder="Email" ng-model="user.email" required> 
+            <input type="text" class="span2" placeholder="First Name" ng-model="user.firstName" ng-disabled="formDisabled" required>
+            <input type="text" class="span3" placeholder="Last Name" ng-model="user.lastName" ng-disabled="formDisabled" required> 
+            <input type="email" class="span3" placeholder="Email" ng-model="user.email" ng-disabled="formDisabled" required> 
           </div>
         </div>
 
@@ -31,21 +32,28 @@
         </div>
 
         <div class="control-group buttons">
-          <input type="button" class='btn clearButton span2' value="Clear" ng-click="clearData()" />
-          <input type="submit" class='btn btn-primary saveButton span2 pull-right' value="Save" />
+          <input  type="button" 
+                  class="btn clearButton span2" 
+                  value="Clear" 
+                  ng-click="clearData()"/>
+          <input  type="submit" 
+                  class="btn btn-primary saveButton span2 pull-right" 
+                  value="Save" 
+                  ng-disabled="sigForm.$invalid" 
+                  ng-class="{disabled:sigForm.$invalid}"/>
         </div>
       </form>
 
       <hr />
 
-      <h3>Super Signers:</h3>
+      <h3>Signatories:</h3>
       <div>
         <table class="table table-striped">
             <thead>
               <tr>
                   <th>Name</th>
                   <th>Email</th>
-                  <th>Signature</th>
+                  <th class="script">Signature</th>
               </tr>
           </thead>   
           <tbody>

@@ -48,13 +48,18 @@ angular.module('MyDirectives',[])
 })
 .directive('regensigpad',function() {
   return {
-    template: '<div class="sig sigWrapper"><canvas class="pad" width="436" height="120"></canvas></div>',
+    template: '<img ng-src="{{pic}}" />',
     restrict: 'E',
-    scope: true,
+    scope: {sigdata:'@'},
     link: function (scope,element,attr,ctrl) {
-      var sigPadAPI = $(element).signaturePad({
-        displayOnly: true
-      }).regenerate(scope.$eval(attr.sigdata));      
+
+      attr.$observe('sigdata',function (val) {
+        var sigPadAPI = $('<div class="sig sigWrapper"><canvas class="pad" width="436" height="120"></canvas></div>').signaturePad({
+                          displayOnly: true
+                        }); 
+        sigPadAPI.regenerate(val);
+        scope.pic = sigPadAPI.getSignatureImage();
+      });
     }
 
   };
