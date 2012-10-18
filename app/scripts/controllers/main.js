@@ -28,7 +28,7 @@ var MainCtrl = ngSignItApp.controller('MainCtrl', function($scope,DataService) {
       // Show the description of the selected petition and enable the form
       // Use the 'get' method from backbone.js collection to get the proper petition, 
       // then use the model's 'get' method to get the Description field data. 
-      $scope.petitionDescription = $scope.petitionCollection.get(id).get('Description');
+      $scope.petitionDescription = $scope.petitionCollection.get(id).get('description');
       $scope.formDisabled = false;
     } else {
       // If the default selection in the select2 control is chosen, then reset everything.
@@ -88,4 +88,4 @@ var MainCtrl = ngSignItApp.controller('MainCtrl', function($scope,DataService) {
   });
 
 });
-MainCtrl.$inject = ['$scope','ParseService'];
+MainCtrl.$inject = ['$scope','DataService'];

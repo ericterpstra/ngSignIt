@@ -7,6 +7,10 @@ var ngSignItApp = angular.module('ngSignItApp', ['MyDirectives','DataServices','
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/parse', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
