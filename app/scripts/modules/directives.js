@@ -31,6 +31,10 @@ angular.module('MyDirectives',[])
         sigPadAPI.clearCanvas();
       });
       
+      $(element).find('.pad').on('touchend',function (obj) {
+        scope.updateModel();
+      });
+
       // when the mouse is lifted from the canvas, set the signature pad data as the model value
       scope.updateModel = function() {
         $timeout(function() {
