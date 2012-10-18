@@ -96,6 +96,14 @@ angular.module('DataServices', [])
       apiVersion: 0
     });
 
+    // Define StackMob Model and Collection for Signature records (firstName, lastName, email, signature, and petitionId)
+    var Signature = StackMob.Object.extend( {schemaName:"signature"} );
+    var SignatureCollection = StackMob.Collection.extend( { model: Signature } );
+
+    // Define StackMob Model and Collection for Petitions. 
+    var Petition = StackMob.Object.extend( {schemaName:"petition"} );
+    var PetitionCollection = StackMob.Collection.extend( { model: Petition } );
+
     /**
      * Service Object
      */
@@ -104,12 +112,13 @@ angular.module('DataServices', [])
       getPetitions : function getPetitions(callback) {
         // Instantiate a petition collection
         var petitions = new PetitionCollection();
+        var q = new StackMob.Collection.Query();
 
-        // Use Parse's fetch method (a modified version of backbone.js fetch) to get all the petitions.
-        petitions.fetch({
+        // Use StackMob's fetch method (a modified version of backbone.js fetch) to get all the petitions.
+        petitions.query(q, {
           success: function (results) {
               // Send the petition collection back to the caller if it is succesfully populated. 
-              callback(petitions);
+              callback(petitions.add(results));
           },
           error: function ( results,error) {
               alert("Collection Error: " + error.message);
@@ -202,8 +211,10 @@ angular.module('DataServices', [])
  * This service is injected into the Main Controller
  */
 .factory('DataService', function (ParseService,StackMobService,BackboneService,$location) {
+  var serviceToUse = BackboneService;
 
-  var useParse = $location.path() === '/parse';
+  if ( $location.absUrl().indexOf("stackmob") ) serviceToUse = BackboneService;
+  if ( $location.path() === '/parse' ) serviceToUse = ParseService;
 
   return useParse ? ParseService : BackboneService;
 });
