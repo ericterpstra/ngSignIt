@@ -7,9 +7,9 @@ the canvas, clicking Save will add the form data to the *Signatories* list.
 
 Try the Parse version here: http://ericterpstra.com/apps/ngSignIt/#/parse
 
-Or the Backbone version: http://ericterpstra.com/apps/ngSignIt/
+StackMob Version: http://dev.ngsignit.bourbonbasement.stackmobapp.com/dist/#/
 
-The StackMob link is forthcoming.
+Backbone version (no persistence): http://ericterpstra.com/apps/ngSignIt/
 
 ## Parse.com and StackMob
 There are two different back-end database providers used in this app.
