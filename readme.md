@@ -5,6 +5,10 @@ It is very simple - a user picks a 'petition' from a select box,
 and fills out the three form fields.  After drawing a signature on
 the canvas, clicking Save will add the form data to the *Signatories* list.
 
+Try the Parse version here: http://ericterpstra.com/apps/ngSignIt/#/parse
+Or the Backbone version: http://ericterpstra.com/apps/ngSignIt/
+The StackMob link is forthcoming.
+
 ## Parse.com and StackMob
 There are two different back-end database providers used in this app.
 By default, the app uses neither service, but rather a simple backbone.js
