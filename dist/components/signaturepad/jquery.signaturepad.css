@@ -177,7 +177,7 @@
    * IE will ignore this line because of the hotspot position
    * Unfortunately we need this twice, because some browsers ignore the hotspot inside the .cur
    */
-  cursor: url("./pen.cur") 16 16, crosshair;
+  cursor: url("pen.cur") 16 16, crosshair;
 }
 
 .typed {

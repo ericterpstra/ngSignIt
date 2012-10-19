@@ -27,7 +27,8 @@ angular.module('DataServices', [])
      * with another back-end service provider without modifying my controller much, if at all.
      */
     var ParseService = {
-
+      name: "Parse",
+      
       // Retrieve all petitions
       getPetitions : function getPetitions(callback) {
         // Instantiate a petition collection
@@ -108,7 +109,8 @@ angular.module('DataServices', [])
      * Service Object
      */
     var StackMobService = {
-
+      name: "StackMob",
+      
       getPetitions : function getPetitions(callback) {
         // Instantiate a petition collection
         var petitions = new PetitionCollection();
@@ -210,7 +212,8 @@ angular.module('DataServices', [])
   petitions.add([ pet1, pet2 ]);
 
   BackboneService = {
-      
+      name: "Backbone",
+       
       // Retrieve all petitions
       getPetitions : function getPetitions(callback) {
         $timeout(function(){
@@ -253,7 +256,7 @@ angular.module('DataServices', [])
 .factory('DataService', function (ParseService,StackMobService,BackboneService,$location) {
   var serviceToUse = BackboneService;
 
-  if ( $location.absUrl().indexOf("stackmob") || $location.absUrl().indexOf("4567") ) serviceToUse = StackMobService;
+  if ( $location.absUrl().indexOf("stackmob") > 0 || $location.absUrl().indexOf("4567") > 0 ) serviceToUse = StackMobService;
   if ( $location.path() === '/parse' ) serviceToUse = ParseService;
 
   return serviceToUse;

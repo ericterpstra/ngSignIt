@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# Time: Thu Oct 18 2012 18:47:52 GMT-0500 (CDT)
+# Time: Thu Oct 18 2012 21:29:17 GMT-0500 (CDT)
 # This manifest was created by confess.js, http://github.com/jamesgpearce/confess
 #
 # Retrieved URL: http://localhost:3501/#/
@@ -43,7 +43,7 @@ http://www.parsecdn.com/js/parse-1.1.5.min.js
 scripts/bbbaa449.ngSignIt.js
 scripts/controllers/da48c408.main.js
 scripts/modules/2c1045c8.directives.js
-scripts/modules/9d246a1a.services.js
+scripts/modules/bf4fe6c3.services.js
 scripts/vendor/d10639ae.angular.js
 styles/ec1dfae8.main.css
 
