@@ -1,7 +1,9 @@
 /**
  * DataService Module
  *
- *  Service Provider for Back-end APIs
+ *  A collection of services that provide a variety of back-end options for saving
+ *  and retrieving data.  StackMob.com and Parse.com are Backend-as-a-Service companies.
+ *  They provide easy to use databases for mobile and HTML5 applications.
  */
 angular.module('DataServices', []) 
 /**
@@ -10,7 +12,7 @@ angular.module('DataServices', [])
  */
 .factory('ParseService', function(){
     // Initialize Parse API and objects. Please don't use this key in your own apps. It won't work anyway.
-    Parse.initialize("d46qFYur20F0T5XqD61wGWHtey9z3Q1ouBkm2t3X", "8Mo9iTOBJmmcPwAYcT4EppSBZlQulHn75RUT9Sny");
+    Parse.initialize("<PLEASE USE YOUR OWN APP KEY>", "<PLEASE USE YOUR OWN API KEY>");
 
     // Define Parse Model and Collection for Signature records (firstName, lastName, email, signature, and petitionId)
     var Signature = Parse.Object.extend("signature");
@@ -87,13 +89,11 @@ angular.module('DataServices', [])
  * This is a service to use StackMob as a back-end for the application.
  */
 .factory('StackMobService', function(){
-    // COMING SOON! Use StacMob instead of Parse.com as a back-end provider.
-    // STackmob also bases their javascript API on backbone.js, so most of the data is saved and retrieved 
-    // in a manner similar to Parse.com.  It should be fairly trivial for a controller to use one service or the other
+    // Init the StackMob API. This information is provided by the StackMob app dashboard
     StackMob.init({
       appName: "ngsignit",
-      clientSubdomain: "bourbonbasement",
-      publicKey: "ef6fd991-a12f-416d-9d36-a31e14f2590f",
+      clientSubdomain: "<PLEASE USE YOUR OWN SUBDOMAIN>",
+      publicKey: "<PLEASE USE YOUR OWN PUBLICKEY>",
       apiVersion: 0
     });
 
@@ -114,12 +114,15 @@ angular.module('DataServices', [])
       getPetitions : function getPetitions(callback) {
         // Instantiate a petition collection
         var petitions = new PetitionCollection();
+        // Createa  new StackMob Query object.  This will be empty, so all records will be retrieved.
         var q = new StackMob.Collection.Query();
 
         // Use StackMob's fetch method (a modified version of backbone.js fetch) to get all the petitions.
         petitions.query(q, {
           success: function (results) {
-              // Send the petition collection back to the caller if it is succesfully populated. 
+              // The results from StackMob are returned as an array of Model objects.
+              // The Main Controller expects a Collection, so add the objects to the collection 
+              // before sending results back to the caller.
               callback(petitions.add(results));
           },
           error: function ( results,error) {
@@ -130,14 +133,19 @@ angular.module('DataServices', [])
 
       saveSignature : function saveSignature(data, callback){
 				var sigToSave = new Signature();
+
+        // StackMob only allows lowercase for class names and data attributes.
+        // The app was already written using camelCase before adding the StackMob adapter
+        // Translate the camelCase object to a StackMob object
 				sigToSave.set({
 					firstname: data.firstName,
 					lastname: data.lastName,
 					petitionid: data.petitionId,
 					email: data.email,
-					signature: JSON.stringify(data.signature)
+					signature: JSON.stringify(data.signature) //Also, StackMob does not allow arrays of objects, so we need to stringify the signature data and save it to a 'String' data field.
 				});
 
+        // Then save, as usual.
 				sigToSave.save({},{
 					success: function(result) {
 						callback(result);
@@ -151,15 +159,22 @@ angular.module('DataServices', [])
       getSignatures : function getSignatures(petitionId, callback) {
 				var signatures = new SignatureCollection();
 				var q = new StackMob.Collection.Query();
+        // We will need to adjust the StackMob results to be compatable with our Main Controller code.
+        // signatureArray will be an array of Signature Models.
 				var signatureArray = [];
 
+        // Create the query object to match signatures on petitionId
 				q.equals('petitionid',petitionId);
 
+        // Execute the query via the StackMob API. This calls the server.
 				signatures.query(q,{
 					success: function(collection) {
+            // Iterate over the results, and translate the object to work with the Main Controller.
 						collection.each(function(item) {
 							item.set({
+                // The stringified signature must be converted back to an array of objects
 								signature: JSON.parse(item.get('signature')),
+                // lower case attributes must be converted to camelCase
 								firstName: item.get('firstname'),
 								lastName: item.get('lastname')
 							});
@@ -186,6 +201,7 @@ angular.module('DataServices', [])
  * all the signatures disappear. 
  */
 .factory('BackboneService', function ($timeout) {
+  // Instantiate our Models and Collections.
   var Signature = Backbone.Model.extend();
   var SignatureCollection = Backbone.Collection.extend({model:Signature});
 
@@ -197,6 +213,7 @@ angular.module('DataServices', [])
   var signatures = new SignatureCollection();
   var petitions = new PetitionCollection();
 
+  // Create some petitions to use in the application
   pet1.set({
     id: "8n37f7s",
     title: "NASA Should Start Mining The Moon to Fund Itself",
@@ -209,13 +226,16 @@ angular.module('DataServices', [])
     description: "Brave cows who escape from their captors live a life of fear and anxiety. They are always hiding, and always on the run.  A protective sanctuary is needed to protect the brave bovine that want a life of freedom and prosperity."
   });
 
+  // Add the petitions to the PetitionCollection object
   petitions.add([ pet1, pet2 ]);
 
+  // Create a service
   BackboneService = {
       name: "Backbone",
        
       // Retrieve all petitions
       getPetitions : function getPetitions(callback) {
+        // Create a delay, otherwise Angular complains in the callback when using $apply
         $timeout(function(){
           callback(petitions);
         });
@@ -224,6 +244,7 @@ angular.module('DataServices', [])
       saveSignature : function saveSignature(data, callback){
         var sigToAdd = new Signature();
         
+        // Create a new instance of Signature to add to the Signature Collection.
         sigToAdd.set({
           firstName: data.firstName,
           lastName: data.lastName,
@@ -240,6 +261,7 @@ angular.module('DataServices', [])
       },
 
       getSignatures : function getSignatures(petitionId, callback) {
+        // Use underscore.js 'where' function to find all objects who's petitionId attribute matches the selected petitionId
         var sigSubset = signatures.where({petitionId:petitionId});
         $timeout(function(){
           callback(sigSubset);
@@ -254,9 +276,13 @@ angular.module('DataServices', [])
  * This service is injected into the Main Controller
  */
 .factory('DataService', function (ParseService,StackMobService,BackboneService,$location) {
+  // Use the BackboneService by default
   var serviceToUse = BackboneService;
 
+  // StackMob apps must be hosted on the stackmob server, or be run locally using the stackmob runner, which uses port 4567
   if ( $location.absUrl().indexOf("stackmob") > 0 || $location.absUrl().indexOf("4567") > 0 ) serviceToUse = StackMobService;
+
+  // If 'parse' appears in the path, use the Parse.com service instead
   if ( $location.path() === '/parse' ) serviceToUse = ParseService;
 
   return serviceToUse;

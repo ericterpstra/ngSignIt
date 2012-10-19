@@ -55,7 +55,6 @@ angular.module('MyDirectives',[])
       // Validate signature pad.
       // See http://docs.angularjs.org/guide/forms for more detail on how this works.
       ctrl.$parsers.unshift(function(viewValue) {
-        console.log('validating', viewValue);
         if ( sigPadAPI.validateForm() ) {
           ctrl.$setValidity('sigpad', true);
           return viewValue;
