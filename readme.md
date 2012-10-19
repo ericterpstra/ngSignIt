@@ -6,7 +6,9 @@ and fills out the three form fields.  After drawing a signature on
 the canvas, clicking Save will add the form data to the *Signatories* list.
 
 Try the Parse version here: http://ericterpstra.com/apps/ngSignIt/#/parse
+
 Or the Backbone version: http://ericterpstra.com/apps/ngSignIt/
+
 The StackMob link is forthcoming.
 
 ## Parse.com and StackMob
@@ -22,3 +24,9 @@ In order to use StackMob as a back-end provider, the application must be hosted
 on StackMob's servers.  A StackMob account is also free (www.stackmob.com).  You can try this version
 by forking this project, changing the StackMob init values, and deploying in your
 own StackMob account.
+
+##Yeoman
+This application was created with Yeoman (yeoman.io) and the angular template.  
+If you have Yeoman installed, you can clone this entire project and run ```Yeoman build```
+to kick off the build process.  Files are put into the *dist* folder, which can then
+be deployed to your server.
