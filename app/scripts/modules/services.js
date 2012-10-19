@@ -253,7 +253,7 @@ angular.module('DataServices', [])
 .factory('DataService', function (ParseService,StackMobService,BackboneService,$location) {
   var serviceToUse = BackboneService;
 
-  if ( $location.absUrl().indexOf("stackmob") || $location.absUrl().indexOf("4567") ) serviceToUse = BackboneService;
+  if ( $location.absUrl().indexOf("stackmob") || $location.absUrl().indexOf("4567") ) serviceToUse = StackMobService;
   if ( $location.path() === '/parse' ) serviceToUse = ParseService;
 
   return serviceToUse;
