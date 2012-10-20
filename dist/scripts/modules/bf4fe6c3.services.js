@@ -10,7 +10,7 @@ angular.module('DataServices', [])
  */
 .factory('ParseService', function(){
     // Initialize Parse API and objects. Please don't use this key in your own apps. It won't work anyway.
-    Parse.initialize("d46qFYur20F0T5XqD61wGWHtey9z3Q1ouBkm2t3X", "8Mo9iTOBJmmcPwAYcT4EppSBZlQulHn75RUT9Sny");
+    Parse.initialize("API KEY GOES HERE", "API KEY GOES HERE");
 
     // Define Parse Model and Collection for Signature records (firstName, lastName, email, signature, and petitionId)
     var Signature = Parse.Object.extend("signature");
@@ -92,8 +92,8 @@ angular.module('DataServices', [])
     // in a manner similar to Parse.com.  It should be fairly trivial for a controller to use one service or the other
     StackMob.init({
       appName: "ngsignit",
-      clientSubdomain: "bourbonbasement",
-      publicKey: "ef6fd991-a12f-416d-9d36-a31e14f2590f",
+      clientSubdomain: "SUBDOMAIN GOES HERE",
+      publicKey: "API KEY GOES HERE",
       apiVersion: 0
     });
 
