@@ -1,15 +1,11 @@
+# UPDATE: this is very old. it uses an old version of Angular, and the backends no longer work.  It is here for posterity only. Not as a learning tool. Use at your own risk.
+
 # AngularJS SignIt!
 
 This is a sample CRUD appliction created with the AngularJS framework. 
 It is very simple - a user picks a 'petition' from a select box, 
 and fills out the three form fields.  After drawing a signature on
 the canvas, clicking Save will add the form data to the *Signatories* list.
-
-Try the Parse version here: http://ericterpstra.com/apps/ngSignIt/#/parse
-
-StackMob Version: http://dev.ngsignit.bourbonbasement.stackmobapp.com/dist/#/
-
-Backbone version (no persistence): http://ericterpstra.com/apps/ngSignIt/
 
 ## Parse.com and StackMob
 There are two different back-end database providers used in this app.
